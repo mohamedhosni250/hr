@@ -22,12 +22,12 @@ class Appointment extends Model
     ];
 
     protected $fillable = [
-       'name',
-       'number',
-       'cv',
-       'called',
-       'status',
-       'email',
+        'name',
+        'number',
+        'file_path',
+        'called',
+        'status',
+        'email',
         'comments',
         'client_id',
         'start_time',

@@ -20,7 +20,7 @@ class StoreAppointmentRequest extends FormRequest
     {
         return [
             'client_id'   => [
-                
+
                 'integer',
             ],
             'start_time'  => [
@@ -32,19 +32,19 @@ class StoreAppointmentRequest extends FormRequest
             'services'    => [
                 'array',
             ],
-            'name' =>[
+            'name' => [
                 'string'
             ],
             'email' => [
                 'email'
             ],
-            'number' =>[
+            'number' => [
                 'required'
-            ]
-            ,
-            'status' =>[
+            ],
+            'status' => [
                 'string'
-            ]
+            ],
+            'file_path' => []
         ];
     }
 }

@@ -94,9 +94,14 @@ class AppointmentsController extends Controller
 
     public function store(StoreAppointmentRequest $request)
     {
+
         $appointment = Appointment::create($request->all());
         $appointment->services()->sync($request->input('services', []));
-
+        if ($request->hasFile('file_path')) {
+            $appointment->update([
+                'file_path' => $request->file('file_path')->store('cvs', 'public')
+            ]);
+        }
         return redirect()->route('admin.appointments.index');
     }
 
