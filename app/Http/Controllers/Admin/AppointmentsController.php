@@ -161,10 +161,13 @@ class AppointmentsController extends Controller
         $number = $validated['number'];
         $name = $validated['name'];
         $department = $validated['department'];
-        $message = "Hello $name We Appreciate your interest in Netarabia and the time you`ve invested in applying for $department HR Manager Amany Fakhry";
-        dd($message);
+        $message = "Hello $name We Appreciate your interest in Netarabia and the time you have invested in applying for  $department Opening we ended up moving forward with another candidate but we would like ti thank you for talking to our team and giving us the opporunity to learn about your skill ,HR Manager  " ;
+      
         $response  = Http::post('https://smsmisr.com/api/webapi/?username=76ML21BL&password=76ML21&language=1&sender=NetArabia&Mobile=2' . $number . '&message=' . $message);
-
-        dd($response->json());
+        if($response->json()['code'] === "1901"){
+            return back();
+        }
+        echo "error happen while sendding ";
+      
     }
 }
