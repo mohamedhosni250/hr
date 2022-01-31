@@ -1,5 +1,9 @@
 <?php
 
+use GuzzleHttp\Psr7\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Route::redirect('/', '/login');
 Route::redirect('/home', '/admin');
 Auth::routes(['register' => false]);
@@ -37,5 +41,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('appointments', 'AppointmentsController');
 
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
-    Route::get('send-message', 'AppointmentsController@sendMessage')->name('notify');
+    Route::get('notify/regiction/', 'AppointmentsController@notify')->name('notify');
 });

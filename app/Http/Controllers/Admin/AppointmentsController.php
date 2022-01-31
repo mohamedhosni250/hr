@@ -12,6 +12,7 @@ use App\Http\Requests\UpdateAppointmentRequest;
 use App\Service;
 use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -20,7 +21,7 @@ class AppointmentsController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $query = Appointment::with(['client', 'employee', 'services'])->select(sprintf('%s.*', (new Appointment)->table));
+            $query = Appointment::with(['services'])->select(sprintf('%s.*', (new Appointment)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -71,7 +72,7 @@ class AppointmentsController extends Controller
                 return implode(' ', $labels);
             });
 
-            $table->rawColumns(['actions', 'placeholder', 'client', 'employee', 'services']);
+            $table->rawColumns(['actions', 'placeholder', 'services']);
 
             return $table->make(true);
         }
@@ -83,13 +84,11 @@ class AppointmentsController extends Controller
     {
         abort_if(Gate::denies('appointment_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $clients = Client::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $employees = Employee::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $services = Service::all()->pluck('name', 'id');
 
-        return view('admin.appointments.create', compact('clients', 'employees', 'services'));
+        return view('admin.appointments.create', compact('services'));
     }
 
     public function store(StoreAppointmentRequest $request)
@@ -109,15 +108,12 @@ class AppointmentsController extends Controller
     {
         abort_if(Gate::denies('appointment_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $clients = Client::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        $employees = Employee::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $services = Service::all()->pluck('name', 'id');
 
-        $appointment->load('client', 'employee', 'services');
+        $appointment->load('employee', 'services');
 
-        return view('admin.appointments.edit', compact('clients', 'employees', 'services', 'appointment'));
+        return view('admin.appointments.edit', compact('services', 'appointment'));
     }
 
     public function update(UpdateAppointmentRequest $request, Appointment $appointment)
@@ -151,5 +147,24 @@ class AppointmentsController extends Controller
         Appointment::whereIn('id', request('ids'))->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function notify(Request $request)
+    {
+        # code...
+
+        $validated = $request->validate([
+            'name' => 'required|string',
+            'number' => 'required',
+            'department' => 'required'
+        ]);
+        $number = $validated['number'];
+        $name = $validated['name'];
+        $department = $validated['department'];
+        $message = "Hello $name We Appreciate your interest in Netarabia and the time you`ve invested in applying for $department HR Manager Amany Fakhry";
+        dd($message);
+        $response  = Http::post('https://smsmisr.com/api/webapi/?username=76ML21BL&password=76ML21&language=1&sender=NetArabia&Mobile=2' . $number . '&message=' . $message);
+
+        dd($response->json());
     }
 }

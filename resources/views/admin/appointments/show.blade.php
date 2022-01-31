@@ -47,8 +47,14 @@
                                 Mobile Number
                             </th>
                             <td>
-                                {{ $appointment->number }} <a id="notify" class="btn btn-primary"> Send
-                                    Message</a>
+                                {{ $appointment->number }}
+                                <form method="get" action="{{ route('admin.notify') }}">
+                                    @csrf
+                                    <input name='name' value="{{ $appointment->name }}" hidden type="text">
+                                    <input name='number' value="{{ $appointment->number }}" hidden type="text">
+                                    <input name='department' value="@foreach ($appointment->services as $service) {{ $service->name }}@endforeach " hidden type="text">
+                                    <button class="btn btn-primary" type="submit"> Send Rejection</button>
+                                </form>
                             </td>
                         </tr>
                         <tr>
@@ -80,11 +86,8 @@
                         </tr>
                     </tbody>
                 </table>
-                <a style="margin-top:20px;" class="btn btn-default" href="{{ url()->previous() }}">
-                    {{ trans('global.back_to_list') }}
-                </a>
-            </div>
 
+            </div>
 
         </div>
     </div>
