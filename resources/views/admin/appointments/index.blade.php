@@ -33,22 +33,22 @@
                         <!--<th>-->
                         <!--    Email-->
                         <!--</th>-->
-                        <th>
+                        {{-- <th>
                             Mobile Number
-                        </th>
+                        </th> --}}
                         <th>
                             Have Called
                         </th>
                         <th>
                             Interview Date
                         </th>
-                          <th>
+                        <th>
                             Comment
                         </th>
                         <th>
                             status
                         </th>
-                       
+
                         <th>
                             &nbsp;
                         </th>
@@ -119,11 +119,11 @@
                         data: 'services',
                         name: 'services.name'
                     },
-                   
-                    {
-                        data: 'mobile_number',
-                        name: 'number'
-                    },
+
+                    // {
+                    //     data: 'mobile_number',
+                    //     name: 'number'
+                    // },
                     {
                         data: 'called',
                         name: 'Called'
@@ -133,10 +133,10 @@
                         name: 'start_time'
                     },
                     {
-                        data:'comments',
-                        name:'comments'
+                        data: 'comments',
+                        name: 'comments'
                     },
-                   
+
                     {
                         data: 'status',
                         name: 'status'

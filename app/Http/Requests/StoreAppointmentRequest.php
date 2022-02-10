@@ -24,7 +24,7 @@ class StoreAppointmentRequest extends FormRequest
                 'integer',
             ],
             'start_time'  => [
-                'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
+                // 'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
             ],
             'services.*'  => [
                 'integer',

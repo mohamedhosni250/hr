@@ -48,7 +48,7 @@
                 <div class="form-group {{ $errors->has('start_time') ? 'has-error' : '' }}">
                     <label for="start_time">InterView Date*</label>
                     <input type="text" id="start_time" name="start_time" class="form-control datetime"
-                        value="{{ old('start_time', isset($appointment) ? $appointment->start_time : '') }}" required>
+                        value="{{ old('start_time', isset($appointment) ? $appointment->start_time : '') }}">
                     @if ($errors->has('start_time'))
                         <em class="invalid-feedback">
                             {{ $errors->first('start_time') }}
@@ -80,7 +80,7 @@
                     <select name="services[]" id="services" class="form-control select2" multiple="multiple">
                         @foreach ($services as $id => $services)
                             <option value="{{ $id }}"
-                                {{ in_array($id, old('services', [])) || (isset($appointment) && $appointment->services->contains($id)) ? 'selected' : '' }}>
+                                {{ in_array($id, old('services', [])) || (isset($appointment) && $appointment->services->contains($id))? 'selected': '' }}>
                                 {{ $services }}</option>
                         @endforeach
                     </select>
@@ -112,7 +112,7 @@
                     <select name="status" id="status" class="form-control select2">
                         <option value="processing">Processing</option>
                         <option value="accepted">accepted</option>
-                                                <option value="semi-reject">Semi-reject</option>
+                        <option value="semi-reject">Semi-reject</option>
 
                         <option value="rejected">rejected</option>
 

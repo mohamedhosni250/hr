@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Appointment;
 use Gate;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Foundation\Http\FormRequest;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,11 +21,12 @@ class UpdateAppointmentRequest extends FormRequest
     {
         return  [
             'client_id'   => [
-                
+
                 'integer',
             ],
             'start_time'  => [
-                'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
+
+                // 'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
             ],
             'services.*'  => [
                 'integer',
@@ -32,25 +34,17 @@ class UpdateAppointmentRequest extends FormRequest
             'services'    => [
                 'array',
             ],
-            'name' =>[
+            'name' => [
                 'string'
             ],
             'email' => [
                 'email'
             ],
-            'number' =>[
+            'number' => [
                 'required'
-            ]
-            ,
-            'called' =>[
-                
-            ]
-            
-           
-            ,
-            'status' =>[
-                'string'
-            ]
+            ],
+            'called' => [],
+            'status' => []
         ];
     }
 }
