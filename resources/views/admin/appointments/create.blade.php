@@ -112,6 +112,8 @@
                     <select name="status" id="status" class="form-control select2">
                         <option value="processing">Processing</option>
                         <option value="accepted">accepted</option>
+                                                <option value="semi-reject">Semi-reject</option>
+
                         <option value="rejected">rejected</option>
 
                     </select>

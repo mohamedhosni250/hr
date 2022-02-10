@@ -30,9 +30,9 @@
                         <th>
                             Department
                         </th>
-                        <th>
-                            Email
-                        </th>
+                        <!--<th>-->
+                        <!--    Email-->
+                        <!--</th>-->
                         <th>
                             Mobile Number
                         </th>
@@ -42,14 +42,13 @@
                         <th>
                             Interview Date
                         </th>
-
-
-                        <th>
-                            {{ trans('cruds.appointment.fields.comments') }}
+                          <th>
+                            Comment
                         </th>
                         <th>
                             status
                         </th>
+                       
                         <th>
                             &nbsp;
                         </th>
@@ -120,10 +119,7 @@
                         data: 'services',
                         name: 'services.name'
                     },
-                    {
-                        data: 'email',
-                        name: 'email'
-                    },
+                   
                     {
                         data: 'mobile_number',
                         name: 'number'
@@ -137,9 +133,10 @@
                         name: 'start_time'
                     },
                     {
-                        data: 'comments',
-                        name: 'comments'
+                        data:'comments',
+                        name:'comments'
                     },
+                   
                     {
                         data: 'status',
                         name: 'status'
@@ -163,3 +160,8 @@
         });
     </script>
 @endsection
+
+<!--  {
+                        data: 'email',
+                        name: 'email'
+                    },-->

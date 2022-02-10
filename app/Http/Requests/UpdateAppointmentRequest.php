@@ -45,10 +45,8 @@ class UpdateAppointmentRequest extends FormRequest
             'called' =>[
                 
             ]
-            ,
-            'status' =>[
-                
-            ]
+            
+           
             ,
             'status' =>[
                 'string'
